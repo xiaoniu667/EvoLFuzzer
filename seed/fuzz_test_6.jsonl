@@ -1,1 +1,0 @@
-{"ID": "HumanEval/0", "code": "\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if abs(numbers[i] - numbers[j]) < threshold:\n                return True\n    return False\n", "fuzzing_test_status": "function does not load"}

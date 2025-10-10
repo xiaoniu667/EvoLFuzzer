@@ -7,7 +7,7 @@ from decimal import Decimal
 from typing import Dict, Any, List, Tuple
 
 from agent.llm_create_seed_agent import TesterFuzzAgent
-from fuzz_programmer_test import check_loader_code, execute_test_case
+from fuzz_programmer_test import check_loader_code, execute_test_case, reliability_guard
 from utils import convert_to_serializable
 
 
@@ -286,7 +286,7 @@ def create_seed(entry: Dict[str, Any]):
 
 
 if __name__ == '__main__':
-    # reliability_guard(maximum_memory_bytes=2 ** 30)
+    reliability_guard(maximum_memory_bytes=2 ** 30)
     dataset = load_vulnerability_dataset("vulnerability_data.jsonl")
     for entry in dataset:
         create_seed(entry)

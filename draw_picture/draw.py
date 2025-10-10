@@ -134,12 +134,12 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
 
 if __name__ == '__main__':
     # 文件夹路径
-    folder_path = './inputs/security_10seed_5epoch'
+    folder_path = './inputs/cweval_10seed_5epoch'
     output_dir = 'results'
     # 标题
-    title = "SecurityEval Dataset"
+    title = "CWEval Dataset"
     # 结果文件名部分
-    result_name = "SecurityEval"
+    result_name = "CWEval"
     # 轮次步长（数据集的数量）
-    step = 121
+    step = 25
     plot_coverage_from_txt(folder_path, output_dir, title, result_name,step)

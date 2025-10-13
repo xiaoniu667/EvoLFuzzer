@@ -1,3 +1,4 @@
+import os
 
 import openai
 from openai import OpenAI
@@ -7,17 +8,22 @@ openai.api_key = 'sk-aa57aa87f359482d80d7bb5ad6ca9ffb'
 model = "deepseek-chat"
 client = OpenAI(api_key=openai.api_key, base_url=openai.api_base)
 
+# 获取当前文件所在的绝对路径
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
-prompt_path_fuzz = "./prompts/initial_inputs_prompt.txt"
-with open(prompt_path_fuzz, "r") as f:
+# ---------- 读取 initial_inputs_prompt.txt ----------
+prompt_path_fuzz = os.path.join(current_dir, "prompts", "initial_inputs_prompt.txt")
+with open(prompt_path_fuzz, "r", encoding="utf-8") as f:
     construct_few_shot_prompt_fuzz = f.read()
 
-prompt_path_fuzz = "./prompts/create_cwe_inputs_prompt.txt"
-with open(prompt_path_fuzz, "r") as f:
+# ---------- 读取 create_cwe_inputs_prompt.txt ----------
+prompt_path_fuzz_cwe = os.path.join(current_dir, "prompts", "create_cwe_inputs_prompt.txt")
+with open(prompt_path_fuzz_cwe, "r", encoding="utf-8") as f:
     construct_cve_prompt_fuzz_batch = f.read()
 
-prompt_path = "./prompts/coder_agent_prompt.txt"
-with open(prompt_path, "r") as f:
+# ---------- 读取 coder_agent_prompt.txt ----------
+prompt_path_coder = os.path.join(current_dir, "prompts", "coder_agent_prompt.txt")
+with open(prompt_path_coder, "r", encoding="utf-8") as f:
     construct_few_shot_prompt = f.read()
 
 def preprocess_string(input_string, lg):

@@ -145,12 +145,12 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
 
 if __name__ == '__main__':
     # 文件夹路径
-    folder_path = './inputs/human_10seed_5epoch_ablation'
+    folder_path = './inputs/mbpp_10seed_5epoch_ablation'
     output_dir = 'results'
     # 标题
-    title = "HumanEval Dataset"
+    title = "MBPP Dataset"
     # 结果文件名部分
-    result_name = "HumanEval"
+    result_name = "MBPP"
     # 轮次步长（数据集的数量）
-    step = 164
+    step = 99
     plot_coverage_from_txt(folder_path, output_dir, title, result_name, step)

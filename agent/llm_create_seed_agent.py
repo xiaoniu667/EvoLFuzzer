@@ -2,7 +2,8 @@ import json
 
 import demjson3
 
-from llm_utils import call_chatgpt_fuzzing_tester, generate_test_inputs_cve
+from llm_utils import call_chatgpt_fuzzing_tester, generate_test_inputs_cve, generate_test_inputs_cve_40, \
+    generate_test_inputs_cve_20, generate_test_inputs_cve_5
 
 
 def remove_json_prefix(input_str):
@@ -72,6 +73,39 @@ class TesterFuzzAgent:
     def generate_test_inputs_cve(self, cve_id):
         prompt = self.entry['Insecure_code']
         inputs = generate_test_inputs_cve(prompt, cve_id)
+        inputs = remove_json_prefix(inputs)
+        inputs = clean_json_string(inputs)
+        try:
+            json_list = demjson3.decode(inputs)
+            return json_list
+        except Exception as e:
+            return []
+
+    def generate_test_inputs_cve_5(self, cve_id):
+        prompt = self.entry['Insecure_code']
+        inputs = generate_test_inputs_cve_5(prompt, cve_id)
+        inputs = remove_json_prefix(inputs)
+        inputs = clean_json_string(inputs)
+        try:
+            json_list = demjson3.decode(inputs)
+            return json_list
+        except Exception as e:
+            return []
+
+    def generate_test_inputs_cve_20(self, cve_id):
+        prompt = self.entry['Insecure_code']
+        inputs = generate_test_inputs_cve_20(prompt, cve_id)
+        inputs = remove_json_prefix(inputs)
+        inputs = clean_json_string(inputs)
+        try:
+            json_list = demjson3.decode(inputs)
+            return json_list
+        except Exception as e:
+            return []
+
+    def generate_test_inputs_cve_40(self, cve_id):
+        prompt = self.entry['Insecure_code']
+        inputs = generate_test_inputs_cve_40(prompt, cve_id)
         inputs = remove_json_prefix(inputs)
         inputs = clean_json_string(inputs)
         try:

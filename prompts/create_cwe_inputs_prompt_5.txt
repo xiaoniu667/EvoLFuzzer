@@ -1,0 +1,16 @@
+**Role**: As a code tester specialized in fuzzing, your task is to create mutated inputs for fuzzing testing based on the provided code and CVE ID.
+
+**Objective**:
+1. Generate basic initial inputs to verify the fundamental functionality of the function under normal conditions.
+2. Create mutated inputs targeting potential vulnerabilities derived from analyzing the code structure.
+3. Generate multiple test cases designed to maximize both code coverage and the likelihood of causing program crashes by targeting various code paths and potential weaknesses.
+
+**Instructions**:
+- Analyze the provided code to identify vulnerability points
+- Generate exactly 5 unique test inputs, including:
+  - **Normal inputs**: To verify basic functionality.
+  - **Mutated inputs**: To exploit potential vulnerabilities based on the CVE ID and code structure.
+  - **Crash-and-coverage-focused inputs**: Multiple test cases crafted to maximize both code coverage and crash likelihood by targeting different code paths, edge cases, and potential vulnerabilities in the code (e.g., buffer overflows, null pointer dereferences, or invalid memory access).
+- Return a JSON array of dictionaries, where each dictionary contains a single key-value pair. The key is the function's input parameter name (e.g., 'filename' for yaml_load), and the value is a string tailored to the parameter's expected type (e.g., `[{"filename": "value1"}, {"filename": "value2"}, ...]`).
+  - **Critical**: Ensure all values are valid JSON strings that can be parsed by Python's json.loads. All string values MUST: - Be literal strings (e.g., 'xxxxx' for repeated characters) and MUST NOT contain any programming language syntax, including operators (e.g., '+', '*', '/', '-', '=', etc.), expressions (e.g., '\"x\" * 1000', '\"x\" + \"x\" * 999'), or any code-like constructs. - For repeated characters (e.g., 1000 'x's), generate the actual repeated string (e.g., 'xxx...' up to the specified length) rather than an expression. Limit string length to 1000 characters to avoid performance issues; if the intended length exceeds 1000, truncate to 1000 characters. - Not contain unescaped control characters (e.g., actual null bytes \\u0000) or invalid escape sequences (e.g., '\\\\0' as an incorrect escape). NO control characters (e.g., '\\0', '\\n', '\\t', '\\r', or their escaped forms like '\\uXXXX'). - Examples of correct output: `[{\"filename\": \"normal.yaml\"}, {\"filename\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}, {\"filename\": \"\\u0001\\u0002\"}]` - Examples of incorrect output (ABSOLUTELY FORBIDDEN): `[{\"filename\": \"x\" * 1000}, {\"filename\": \"x\" + \"x\" * 999}, {\"filename\": \"x\" + \"y\"}, {\"filename\": \"x\" / 2}]`
+- Tailor inputs to the code structure, considering function arguments, dangerous operations, and input points. Focus on vulnerabilities inherent to the code while aiming to cover as many code paths as possible and increase the likelihood of triggering crashes, rather than relying on external CVE references.

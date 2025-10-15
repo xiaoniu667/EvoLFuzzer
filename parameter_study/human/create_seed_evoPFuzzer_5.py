@@ -8,7 +8,6 @@ from collections import defaultdict
 from decimal import Decimal
 from typing import Dict, Any, List, Tuple
 
-
 # 获取根路径
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
@@ -21,8 +20,6 @@ from fuzz_programmer_test import check_loader_code, execute_test_case, reliabili
 from utils import convert_to_serializable
 
 
-
-
 def load_vulnerability_dataset(file_path: str) -> List[Dict[str, Any]]:
     """加载漏洞数据集"""
     dataset = []
@@ -30,8 +27,6 @@ def load_vulnerability_dataset(file_path: str) -> List[Dict[str, Any]]:
         for line in f:
             dataset.append(json.loads(line))
     return dataset
-
-
 
 
 def sanitize_input(data: Any) -> Any:

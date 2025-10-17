@@ -119,7 +119,7 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
     ax.set_title(title, fontsize=16)
     ax.set_xlabel('Epoch', fontsize=12)
     ax.set_ylabel('Path Coverage', fontsize=12)
-    ax.legend(handlelength=3, fontsize=10)  # 优化图例
+    ax.legend(loc='upper left', bbox_to_anchor=(0.02, 0.98), borderaxespad=0.,handlelength=3, fontsize=10)  # 优化图例
     ax.grid(True, linestyle='--', linewidth=1, alpha=0.6)
 
     try:
@@ -145,12 +145,12 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
 
 if __name__ == '__main__':
     # 文件夹路径
-    folder_path = './inputs/mbpp_10seed_5epoch_ablation'
+    folder_path = './inputs/cweval_10seed_5epoch_ablation'
     output_dir = 'results'
     # 标题
-    title = "MBPP Dataset"
+    title = "CWEval Dataset"
     # 结果文件名部分
-    result_name = "MBPP"
+    result_name = "CWEval"
     # 轮次步长（数据集的数量）
-    step = 99
+    step =  25
     plot_coverage_from_txt(folder_path, output_dir, title, result_name, step)

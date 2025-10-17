@@ -21,10 +21,11 @@ def find_round_breaks(df, step):
     return breaks
 
 
-def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
+def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
     """
     从指定文件夹中读取 TXT 文件，绘制 Path Coverage 曲线图。
     自动检测每个文件的轮次边界，轮数从 0 开始。
+    使用四条实线，颜色区分。
     """
 
     # 设置字体
@@ -49,7 +50,7 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
 
     data_list = []
     file_names = []
-    legend_order = ['EvoPFuzzer', 'RMA']  # 可根据需要调整
+    legend_order = ['seed=5', 'seed=10', 'seed=20', 'seed=40']  # 支持四条线
 
     # 读取所有 txt 文件
     for file in os.listdir(folder_path):
@@ -68,7 +69,7 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
             for i in range(len(round_breaks) - 1):
                 start_idx = round_breaks[i]
                 end_idx = round_breaks[i + 1]
-                round_start = i        # 改成从 0 开始
+                round_start = i  # 改成从 0 开始
                 round_end = i + 1
                 data.loc[(data['Index'] >= start_idx) & (data['Index'] < end_idx), 'Round'] = \
                     round_start + (data['Index'] - start_idx) / (end_idx - start_idx) * (round_end - round_start)
@@ -99,17 +100,23 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
 
     # 绘图
     fig, ax = plt.subplots(figsize=(12, 8))
-    colors = ['#ED7D31FF', '#5B9BD5FF']
+    colors = ['#5B9BD5','#ED7D31',  '#70AD47', '#A100A1']  #  蓝,橙, 绿, 紫
 
     for i, (data, label) in enumerate(zip(sorted_data_list, sorted_file_names)):
-        ax.plot(data['Round'], data['Cumulative_Coverage'],
-                label=label, color=colors[i % len(colors)], linestyle='-', linewidth=2)
+        if i >= 4:  # 限制最多四条线
+            break
+        plot_kwargs = {
+            'color': colors[i % len(colors)],
+            'linestyle': '-',  # 全部使用实线
+            'linewidth': 2.5,  # 适中的线条宽度
+        }
+        ax.plot(data['Round'], data['Cumulative_Coverage'], label=label, **plot_kwargs)
 
     ax.set_title(title, fontsize=16)
     ax.set_xlabel('Epoch', fontsize=12)
     ax.set_ylabel('Path Coverage', fontsize=12)
-    ax.legend(loc='upper left', bbox_to_anchor=(0.02, 0.98), borderaxespad=0.)
-    ax.grid(True, linestyle='--', linewidth=1, alpha=0.8)
+    ax.legend(loc='upper left', bbox_to_anchor=(0.02, 0.98), borderaxespad=0.,handlelength=3, fontsize=10)  # 优化图例
+    ax.grid(True, linestyle='--', linewidth=1, alpha=0.6)
 
     try:
         max_round = max(d['Round'].max() for d in sorted_data_list)
@@ -125,7 +132,7 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
 
     output_file = os.path.join(
         output_dir,
-        f'coverage_{result_name}_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}.png'
+        f'coverage_{result_name}_Parameter_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}.png'
     )
     plt.savefig(output_file, dpi=300, bbox_inches='tight', format='png')
     plt.close()
@@ -134,12 +141,12 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
 
 if __name__ == '__main__':
     # 文件夹路径
-    folder_path = './inputs/cweval_10seed_5epoch'
+    folder_path = './inputs/llm_xxxseed_5epoch_parrameter_study'
     output_dir = 'results'
     # 标题
-    title = "CWEval Dataset"
+    title = "LLMSecEval Dataset"
     # 结果文件名部分
-    result_name = "CWEval"
+    result_name = "LLMSecEval"
     # 轮次步长（数据集的数量）
-    step = 25
-    plot_coverage_from_txt(folder_path, output_dir, title, result_name,step)
+    step = 82
+    plot_coverage_from_txt(folder_path, output_dir, title, result_name, step)

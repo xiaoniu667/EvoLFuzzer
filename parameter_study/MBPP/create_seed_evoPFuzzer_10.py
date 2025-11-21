@@ -1,14 +1,13 @@
 import copy
 import json
+from collections import defaultdict
+from decimal import Decimal
+from typing import Dict, Any, List, Tuple
 import os
 import random
 import re
 import sys
 import time
-
-from collections import defaultdict
-from decimal import Decimal
-from typing import Dict, Any, List, Tuple
 
 # 获取根路径
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -16,6 +15,7 @@ parent_dir = os.path.dirname(current_dir)
 project_root = os.path.dirname(parent_dir)
 if project_root not in sys.path:
     sys.path.append(project_root)
+
 
 from agent.llm_create_seed_agent import TesterFuzzAgent
 from fuzz_programmer_test import check_loader_code, execute_test_case, reliability_guard
@@ -29,6 +29,8 @@ def load_vulnerability_dataset(file_path: str) -> List[Dict[str, Any]]:
         for line in f:
             dataset.append(json.loads(line))
     return dataset
+
+
 
 
 def sanitize_input(data: Any) -> Any:
@@ -260,7 +262,7 @@ def save_seed(code: str, cve_id: str, test_inputs_list: List[Dict[str, Any]] = N
             "code": code,
             "fuzzing_inputs": "No inputs created"
         }
-    with open("seed/fuzz_test_5.jsonl", 'a', encoding='utf-8') as f:
+    with open("seed/fuzz_test_6.jsonl", 'a', encoding='utf-8') as f:
         json.dump(convert_to_serializable(task), f, ensure_ascii=False)
         f.write("\n")
 
@@ -278,7 +280,7 @@ def create_seed(entry: Dict[str, Any]):
         save_seed(code, cve_id, test_inputs_list, 1)
         return
     # 使用LLM指导的种子生成
-    llm_seeds = tester_fuzz_agent.generate_test_inputs_cve_5(cve_id)
+    llm_seeds = tester_fuzz_agent.generate_test_inputs_cve(cve_id)
     test_inputs_list.extend(llm_seeds)
     if not test_inputs_list:
         test_inputs = tester_fuzz_agent.generate_test_inputs()  # 生成初始种子
@@ -287,9 +289,9 @@ def create_seed(entry: Dict[str, Any]):
         save_seed(code, cve_id, test_inputs_list, 2)
         return
     # 使用进化算法优化
-    test_inputs_list = ea_fuzz(cve_id, test_inputs_list, code, population_size=5, generations=4)
+    test_inputs_list = ea_fuzz(cve_id, test_inputs_list, code, population_size=10, generations=4)
     print(f"条目 {cve_id} 变异后测试用例数量: {len(test_inputs_list)}")
-    test_inputs_list = test_inputs_list[:5]
+    test_inputs_list = test_inputs_list[:10]
     save_seed(code, cve_id, test_inputs_list, 0)
     print(f"条目 {cve_id} 任务已保存")
 

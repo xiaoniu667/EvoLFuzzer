@@ -20,8 +20,6 @@ def load_vulnerability_dataset(file_path: str) -> List[Dict[str, Any]]:
     return dataset
 
 
-
-
 def sanitize_input(data: Any) -> Any:
     """清洗输入数据，处理特殊字符以确保 json.dumps 可序列化"""
     if isinstance(data, dict):
@@ -138,6 +136,22 @@ def filter_duplicate_results(population: List[Dict[str, Any]], coverage_dict: de
     return unique_population
 
 
+def tournament_selection(population, coverage_dict, tournament_size: int = 3):
+    """
+    锦标赛选择：从种群中随机抽取 tournament_size 个个体，
+    返回其中路径覆盖最长的（即 len(path) 最大）获胜。
+    """
+    if len(population) < tournament_size:
+        tournament_size = len(population)
+
+    contestants = random.sample(population, tournament_size)
+    # 按当前已知路径长度排序，取最优的那个
+    winner = max(
+        contestants,
+        key=lambda x: len(coverage_dict[json.dumps(convert_to_serializable(x), sort_keys=True)])
+    )
+    return winner
+
 def ea_fuzz(cve_id, test_inputs: List[Dict[str, Any]], code: str, population_size: int = 10, generations: int = 4) -> \
         List[Dict[str, Any]]:
     """进化算法优化测试用例，尽量覆盖全路径，以路径为单位记录覆盖"""
@@ -177,7 +191,8 @@ def ea_fuzz(cve_id, test_inputs: List[Dict[str, Any]], code: str, population_siz
         # 生成新个体（通过交叉和变异）
         while len(new_population) < population_size * 2:  # 生成双倍数量的候选个体
             if len(population) >= 2:
-                parent1, parent2 = random.sample(population, 2)
+                parent1 = tournament_selection(population, coverage_dict, tournament_size=3)
+                parent2 = tournament_selection(population, coverage_dict, tournament_size=3)
                 child = crossover(parent1, parent2)
             else:
                 child = copy.deepcopy(random.choice(population))
@@ -227,6 +242,7 @@ def ea_fuzz(cve_id, test_inputs: List[Dict[str, Any]], code: str, population_siz
     print(f"总路径覆盖数量: {len(all_paths)}")
     print(f"覆盖的路径列表: {list(all_paths)}")
     return population
+
 
 
 def save_seed(code: str, cve_id: str, test_inputs_list: List[Dict[str, Any]] = None, status: int = 0):

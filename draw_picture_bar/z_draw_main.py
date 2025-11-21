@@ -20,7 +20,7 @@ y = np.array(y).T.tolist()  # 转置为 (3, 7)
 
 # 自定义横纵坐标名称
 group_names = ["HumanEval", "LLMSecEval", "MBPP","CWEval"]
-column_names = ["RMA", "EvoPFuzzer_w/o_LLM", "EvoPFuzzer_w/o_EA", "EvoPFuzzer"]
+column_names = ["RMA", "EvoLFuzzer_w/o_LLM", "EvoLFuzzer_w/o_EA", "EvoLFuzzer"]
 
 # 检查名称列表长度是否匹配数据维度
 if len(group_names) != a:

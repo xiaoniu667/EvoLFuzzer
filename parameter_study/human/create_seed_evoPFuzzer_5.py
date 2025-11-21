@@ -292,8 +292,20 @@ def create_seed(entry: Dict[str, Any]):
     print(f"条目 {cve_id} 任务已保存")
 
 
+import time
+
 if __name__ == '__main__':
+    # 记录开始时间
+    start_time = time.time()
+    print(f"[INFO] Program started at {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))}")
+
     reliability_guard(maximum_memory_bytes=2 ** 30)
     dataset = load_vulnerability_dataset("vulnerability_data.jsonl")
+
     for entry in dataset:
         create_seed(entry)
+
+    # 记录结束时间
+    end_time = time.time()
+    print(f"[INFO] Program finished at {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end_time))}")
+    print(f"[INFO] Total execution time: {end_time - start_time:.2f} seconds")

@@ -1,9 +1,11 @@
 import copy
 import json
+
 import os
 import random
 import re
 import sys
+import time
 from collections import defaultdict
 from decimal import Decimal
 from typing import Dict, Any, List, Tuple
@@ -297,7 +299,17 @@ def create_seed(entry: Dict[str, Any]):
 
 
 if __name__ == '__main__':
+    # 记录开始时间
+    start_time = time.time()
+    print(f"[INFO] Program started at {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))}")
+
     reliability_guard(maximum_memory_bytes=2 ** 30)
     dataset = load_vulnerability_dataset("vulnerability_data.jsonl")
+
     for entry in dataset:
         create_seed(entry)
+
+    # 记录结束时间
+    end_time = time.time()
+    print(f"[INFO] Program finished at {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end_time))}")
+    print(f"[INFO] Total execution time: {end_time - start_time:.2f} seconds")

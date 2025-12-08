@@ -2,6 +2,9 @@
 .DS_Store
 Thumbs.db
 
+# 忽略 Python 生成的文件
+*.pyc
+
 # 忽略编辑器/IDE 生成的文件
 .idea/
 .vscode/

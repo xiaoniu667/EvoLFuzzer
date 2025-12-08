@@ -169,5 +169,5 @@ Please ensure before submitting:
 ## 📬 Contact
 For questions or suggestions, please contact:
 
-**📧**** Email:**zhuyiwen@st.xatu.edu.cn
+**📧** Email: zhuyiwen@st.xatu.edu.cn
 

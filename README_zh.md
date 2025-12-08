@@ -164,5 +164,5 @@ EvoLFuzzer/
 ## 📬 联系方式
 如有问题或建议，欢迎联系：
 
-**📧**** Email:**zhuyiwen@st.xatu.edu.cn
+**📧** Email: zhuyiwen@st.xatu.edu.cn
 

@@ -6,27 +6,22 @@ import matplotlib.font_manager as fm
 import os
 import datetime
 
-
 def find_round_breaks(df, step):
     """
     根据给定的步长 step 自动生成轮次边界。
-    例如：step=164 -> [0, 164, 328, ... len(df)]
     """
     total_len = len(df)
-    breaks = list(range(0, total_len + step, step))  # 按步长生成
+    breaks = list(range(0, total_len + step, step))
     if breaks[-1] > total_len:
-        breaks[-1] = total_len  # 确保最后一个不超过总长度
+        breaks[-1] = total_len
     elif breaks[-1] < total_len:
-        breaks.append(total_len)  # 确保最后一轮包含结尾
+        breaks.append(total_len)
     return breaks
 
-
-def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
+def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
     """
-    从指定文件夹中读取 TXT 文件，绘制 Path Coverage 曲线图。
-    自动检测每个文件的轮次边界，轮数从 0 开始。
+    绘制 Path Coverage 曲线，输出高分辨率 PNG 和 PDF，字体更大。
     """
-
     # 设置字体
     font_path = 'consola-1.ttf'
     if os.path.exists(font_path):
@@ -63,12 +58,12 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
             round_breaks = find_round_breaks(data, step)
             print(f"{file} 自动检测到轮次边界: {round_breaks}")
 
-            # 索引 → 轮次映射（从 0 开始）
+            # 索引 → 轮次映射
             data['Round'] = 0.0
             for i in range(len(round_breaks) - 1):
                 start_idx = round_breaks[i]
                 end_idx = round_breaks[i + 1]
-                round_start = i        # 改成从 0 开始
+                round_start = i
                 round_end = i + 1
                 data.loc[(data['Index'] >= start_idx) & (data['Index'] < end_idx), 'Round'] = \
                     round_start + (data['Index'] - start_idx) / (end_idx - start_idx) * (round_end - round_start)
@@ -80,7 +75,6 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
             print(f"读取文件 {file_path} 时出错: {e}")
             continue
 
-    # 没有数据就退出
     if not data_list:
         print("没有成功加载任何数据文件！")
         return
@@ -98,17 +92,19 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
             sorted_file_names.append(label)
 
     # 绘图
-    fig, ax = plt.subplots(figsize=(12, 8))
+    fig, ax = plt.subplots(figsize=(16, 12))  # 大尺寸
     colors = ['#ED7D31FF', '#5B9BD5FF']
 
     for i, (data, label) in enumerate(zip(sorted_data_list, sorted_file_names)):
         ax.plot(data['Round'], data['Cumulative_Coverage'],
-                label=label, color=colors[i % len(colors)], linestyle='-', linewidth=2)
+                label=label, color=colors[i % len(colors)], linestyle='-', linewidth=4)
 
-    ax.set_title(title, fontsize=16)
-    ax.set_xlabel('Epoch', fontsize=12)
-    ax.set_ylabel('Path Coverage', fontsize=12)
-    ax.legend(loc='upper left', bbox_to_anchor=(0.02, 0.98), borderaxespad=0.)
+    # 字体和线条设置更大
+    ax.set_title(title, fontsize=48, fontweight='bold', pad=30)  # pad=30 可以根据需要调节
+    ax.set_xlabel("Epoch", fontsize=40, fontweight='bold')
+    ax.set_ylabel("Path Coverage", fontsize=40, fontweight='bold', labelpad=25)  # labelpad=25 可以调节
+    ax.tick_params(axis='both', labelsize=32)
+    ax.legend(fontsize=32, loc='upper left', bbox_to_anchor=(0.02, 0.98), borderaxespad=0.)
     ax.grid(True, linestyle='--', linewidth=1, alpha=0.8)
 
     try:
@@ -117,29 +113,26 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name,step):
         max_cov = max(d['Cumulative_Coverage'].max() for d in sorted_data_list)
         ax.set_xlim(0, max_round)
         ax.set_ylim(max(min_cov - 10, 0), max_cov + 10)
-        ax.set_xticks(list(range(0, int(max_round) + 2)))  # +2 是为了多显示一个
+        ax.set_xticks(list(range(0, int(max_round) + 2)))
     except Exception as e:
         print(f"设置坐标轴时出错: {e}")
 
     plt.tight_layout()
 
-    output_file = os.path.join(
-        output_dir,
-        f'coverage_{result_name}_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}.png'
-    )
-    plt.savefig(output_file, dpi=300, bbox_inches='tight', format='png')
-    plt.close()
-    print(f"图表已保存为: {output_file}")
+    # 保存文件
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_file_pdf = os.path.join(output_dir, f'coverage_{result_name}_{timestamp}.pdf')
 
+    # PDF 矢量图
+    plt.savefig(output_file_pdf, bbox_inches='tight', format='pdf')
+    plt.close()
+
+    print(f"图表已保存为:  {output_file_pdf}")
 
 if __name__ == '__main__':
-    # 文件夹路径
-    folder_path = './inputs/cweval_10seed_5epoch'
-    output_dir = 'results/temp'
-    # 标题
-    title = "CWEval Dataset"
-    # 结果文件名部分
-    result_name = "CWEval"
-    # 轮次步长（数据集的数量）
-    step = 25
-    plot_coverage_from_txt(folder_path, output_dir, title, result_name,step)
+    folder_path = './inputs/llmsec_10seed_5epoch'
+    output_dir = 'results'
+    title = "LLMSecEval Dataset"
+    result_name = "LLMSecEval"
+    step = 121
+    plot_coverage_from_txt(folder_path, output_dir, title, result_name, step)

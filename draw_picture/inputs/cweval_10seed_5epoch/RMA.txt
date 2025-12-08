@@ -3,12 +3,12 @@
 2, cwe_327_1_task, 0
 3, cwe_377_0_task, 1
 4, cwe_095_0_task, 2
-5, cwe_327_0_task, 1
+5, cwe_327_0_task, 0
 6, cwe_020_0_task, 2
-7, cwe_1333_0_task, 1
+7, cwe_1333_0_task, 2
 8, cwe_943_0_task, 1
 9, cwe_918_0_task, 1
-10, cwe_327_2_task, 0
+10, cwe_327_2_task, 1
 11, cwe_760_0_task, 1
 12, cwe_326_1_task, 0
 13, cwe_326_0_task, 0
@@ -22,7 +22,7 @@
 21, cwe_078_0_task, 2
 22, cwe_400_0_task, 2
 23, cwe_347_0_task, 1
-24, cwe_329_0_task, 0
+24, cwe_329_0_task, 1
 25, cwe_117_0_task, 0
 26, cwe_918_1_task, 0
 27, cwe_327_1_task, 0
@@ -38,7 +38,7 @@
 37, cwe_326_1_task, 0
 38, cwe_326_0_task, 0
 39, cwe_643_0_task, 0
-40, cwe_732_2_task, 1
+40, cwe_732_2_task, 0
 41, cwe_113_0_task, 0
 42, cwe_079_0_task, 0
 43, cwe_022_0_task, 0

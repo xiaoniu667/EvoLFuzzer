@@ -1,0 +1,36 @@
+2025-12-03 20:46:52,202 - INFO - File: results\fuzz_test_evofuzzer_branch_coverage_20251203_175212.txt
+2025-12-03 20:46:52,202 - INFO - Total paths covered: 140
+2025-12-03 20:46:52,202 - INFO - Path coverage per step (cumulative):
+2025-12-03 20:46:52,202 - INFO - Step 1: 125
+2025-12-03 20:46:52,202 - INFO - Step 2: 135
+2025-12-03 20:46:52,202 - INFO - Step 3: 138
+2025-12-03 20:46:52,202 - INFO - Step 4: 139
+2025-12-03 20:46:52,202 - INFO - Step 5: 140
+2025-12-03 20:46:52,202 - INFO - ----------------------------------------
+2025-12-03 20:46:52,203 - INFO - File: results\fuzz_test_evolfuzzer_branch_coverage_20251201_155222.txt
+2025-12-03 20:46:52,203 - INFO - Total paths covered: 157
+2025-12-03 20:46:52,203 - INFO - Path coverage per step (cumulative):
+2025-12-03 20:46:52,203 - INFO - Step 1: 114
+2025-12-03 20:46:52,203 - INFO - Step 2: 126
+2025-12-03 20:46:52,203 - INFO - Step 3: 138
+2025-12-03 20:46:52,203 - INFO - Step 4: 154
+2025-12-03 20:46:52,203 - INFO - Step 5: 157
+2025-12-03 20:46:52,203 - INFO - ----------------------------------------
+2025-12-03 20:46:52,204 - INFO - File: results\fuzz_test_lfuzzer_branch_coverage_20251203_193629.txt
+2025-12-03 20:46:52,204 - INFO - Total paths covered: 139
+2025-12-03 20:46:52,204 - INFO - Path coverage per step (cumulative):
+2025-12-03 20:46:52,204 - INFO - Step 1: 112
+2025-12-03 20:46:52,204 - INFO - Step 2: 123
+2025-12-03 20:46:52,204 - INFO - Step 3: 137
+2025-12-03 20:46:52,204 - INFO - Step 4: 139
+2025-12-03 20:46:52,204 - INFO - Step 5: 139
+2025-12-03 20:46:52,204 - INFO - ----------------------------------------
+2025-12-03 20:46:52,205 - INFO - File: results\fuzz_test_rma_branch_coverage_20251201_152931.txt
+2025-12-03 20:46:52,205 - INFO - Total paths covered: 128
+2025-12-03 20:46:52,205 - INFO - Path coverage per step (cumulative):
+2025-12-03 20:46:52,205 - INFO - Step 1: 122
+2025-12-03 20:46:52,205 - INFO - Step 2: 126
+2025-12-03 20:46:52,205 - INFO - Step 3: 128
+2025-12-03 20:46:52,205 - INFO - Step 4: 128
+2025-12-03 20:46:52,205 - INFO - Step 5: 128
+2025-12-03 20:46:52,206 - INFO - ----------------------------------------

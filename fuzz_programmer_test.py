@@ -4,8 +4,10 @@ import importlib.util
 import os
 import platform
 import signal
+import sqlite3
 import tempfile
 from contextlib import contextmanager
+from io import BytesIO
 from typing import Optional
 
 import coverage
@@ -53,7 +55,30 @@ def timeout(seconds):
         signal.alarm(0)  # 取消定时器
 
 
+
 def execute_test_case(code, input_dict):
+    """
+    根据代码内容自动选择执行方式：
+    - 普通 Python: do_execute_test_case
+    - Flask Web 应用: do_execute_test_case_web
+    """
+
+    code_lower = code.lower()
+
+    is_flask_app = (
+        "from flask" in code_lower or
+        "flask(" in code_lower or
+        "@app.route" in code_lower
+    )
+
+    if is_flask_app:
+        return do_execute_test_case_web(code, input_dict)
+    else:
+        return do_execute_test_case(code, input_dict)
+
+
+
+def do_execute_test_case(code, input_dict):
     """执行单个测试用例的辅助函数，返回覆盖率、执行状态和覆盖的行"""
     # 获取函数代码
     fuc, func_name,temp_file_path = check_loader_code(code)
@@ -98,11 +123,192 @@ def execute_test_case(code, input_dict):
     return coverage_score, is_pass, covered_lines
 
 
+def do_execute_test_case_web(code, input_dict):
+    """
+    修正版 execute_test_case_web：
+    - 在加载模块前启动 coverage
+    - include 使用绝对路径
+    - 自动屏蔽 render_template / Jinja2 查找模板
+    - 支持 cookies/session/headers/files 等完整 Flask fuzzing
+    """
+
+    # 1) 写入临时文件
+    _, _, temp_file_path = check_loader_code(code)
+    abs_path = os.path.abspath(temp_file_path)
+
+    # 2) 开启 coverage（必须在 import 前）
+    cov_data_file = os.path.join(os.path.dirname(temp_file_path), ".coverage")
+    cov = coverage.Coverage(data_file=cov_data_file, include=[abs_path])
+    cov.start()
+
+    try:
+        # 3) 动态导入模块
+        spec = importlib.util.spec_from_file_location("temp_module", temp_file_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        # 4) 找 app，不是 Flask 则退出
+        if "app" not in module.__dict__:
+            cov.stop()
+            cov.save()
+            return 0.0, False, set()
+
+        app = module.app
+
+        try:
+            from flask import render_template
+            import types
+            import jinja2
+
+            def fake_render_template(name, **kwargs):
+                return f"[FAKE TEMPLATE: {name}]"
+
+            # 覆盖模块内的 render_template（用于用户代码里调用）
+            module.render_template = fake_render_template
+
+            # 覆盖 Flask 内部真正的选择模板逻辑，避免 Jinja2 查文件
+            app.jinja_env.get_or_select_template = lambda *a, **k: None
+
+        except Exception as e:
+
+            print("WARNING: Fake template patch failed:", e)
+
+        client = app.test_client()
+
+        # 5) sessions
+        if "session" in input_dict:
+            with client.session_transaction() as sess:
+                for k, v in input_dict["session"].items():
+                    sess[k] = v
+
+        # 6) cookies（修复 set_cookie 调用格式）
+        for k, v in input_dict.get("cookies", {}).items():
+            client.set_cookie(server_name="localhost", key=k, value=v)
+
+        headers = input_dict.get("headers", {}) or {}
+        args = input_dict.get("args", {}) or {}
+        form = input_dict.get("form", {}) or {}
+        json_body = input_dict.get("json", None)
+        raw_data = input_dict.get("data", None)
+        values = input_dict.get("values", {}) or {}
+        files = input_dict.get("files", {}) or {}
+
+        # 7) 自动选路由
+        target_rule = None
+        for rule in app.url_map.iter_rules():
+            if rule.endpoint == "static":
+                continue
+            target_rule = rule
+            break
+
+        if target_rule is None:
+            raise RuntimeError("No routable endpoint found.")
+
+        route_url = target_rule.rule
+        methods = list(target_rule.methods - {"HEAD", "OPTIONS"})
+
+        # path parameters
+        if target_rule.arguments:
+            for p in target_rule.arguments:
+                val = input_dict.get("path_params", {}).get(p, "1")
+                route_url = route_url.replace(f"<{p}>", str(val))
+                route_url = route_url.replace(f"<int:{p}>", str(val))
+                route_url = route_url.replace(f"<string:{p}>", str(val))
+
+        # 8) method 推断
+        method = input_dict.get("method")
+        if not method:
+            if "POST" in methods and (form or json_body or raw_data or files):
+                method = "POST"
+            else:
+                method = "GET"
+        method = method.upper()
+
+        send_kwargs = {"query_string": args}
+        if headers:
+            send_kwargs["headers"] = headers
+
+        # 9) 文件上传
+        if files:
+            data = {}
+            if form:
+                data.update(form)
+            for key, finfo in files.items():
+                fname = finfo.get("filename", "file")
+                content = finfo.get("content", b"")
+                if isinstance(content, str):
+                    content = content.encode()
+                data[key] = (BytesIO(content), fname)
+            send_kwargs["data"] = data
+
+        else:
+            if method == "POST":
+                if json_body is not None:
+                    send_kwargs["json"] = json_body
+                elif raw_data is not None:
+                    send_kwargs["data"] = raw_data
+                elif form:
+                    send_kwargs["data"] = form
+                elif values:
+                    send_kwargs["data"] = values
+                else:
+                    send_kwargs["data"] = {}
+            # GET 不需要 data
+
+        # 10) 发请求
+        if method == "POST":
+            resp = client.post(route_url, **send_kwargs)
+        elif method == "PUT":
+            resp = client.put(route_url, **send_kwargs)
+        elif method == "DELETE":
+            resp = client.delete(route_url, **send_kwargs)
+        else:
+            resp = client.get(route_url, **send_kwargs)
+
+        is_pass = (resp is not None and resp.status_code < 500)
+
+    except Exception as e:
+        print("执行异常:", repr(e))
+        try:
+            cov.stop()
+            cov.save()
+        except:
+            pass
+        return 0.0, False, set()
+
+    # 11) coverage
+    try:
+        cov.stop()
+        cov.save()
+        data = cov.get_data()
+
+        covered_lines = set()
+        coverage_score = 0.0
+
+        if data:
+            files = data.measured_files()
+            if abs_path in files:
+                analysis = cov._analyze(abs_path).numbers
+                total = analysis.n_statements
+                missed = analysis.n_missing
+                if total > 0:
+                    coverage_score = 100.0 * (total - missed) / total
+                covered_lines = set(data.lines(abs_path))
+
+        return coverage_score, is_pass, covered_lines
+
+    except Exception as e:
+        print("coverage 计算失败:", repr(e))
+        return 0.0, is_pass, set()
+
+
+
+
 def reliability_guard(maximum_memory_bytes: Optional[int] = None):
     """
     禁用可能干扰测试的破坏性功能，包括 HTTP 请求
     """
-    # 现有内存限制代码
+    # # 现有内存限制代码
     if maximum_memory_bytes is not None:
         import resource
         resource.setrlimit(resource.RLIMIT_AS, (maximum_memory_bytes, maximum_memory_bytes))
@@ -118,15 +324,14 @@ def reliability_guard(maximum_memory_bytes: Optional[int] = None):
     os.environ['OMP_NUM_THREADS'] = '1'
 
     # 禁用系统相关功能
-    os.kill = None
+    # os.kill = None
     os.system = None
     os.putenv = None
-    # 保留 os.remove 和 os.unlink
     os.removedirs = None
     os.rmdir = None
     os.fchdir = None
     os.setuid = None
-    os.fork = None
+    # os.fork = None  # 开启多线程
     os.forkpty = None
     os.killpg = None
     os.rename = None

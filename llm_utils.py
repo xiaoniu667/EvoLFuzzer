@@ -4,7 +4,7 @@ import openai
 from openai import OpenAI
 
 openai.api_base = "https://api.deepseek.com/v1"
-openai.api_key = 'sk-aa57aa87f359482d80d7bb5ad6ca9ffb'
+openai.api_key = '' #替换为自己的key
 model = "deepseek-chat"
 client = OpenAI(api_key=openai.api_key, base_url=openai.api_base)
 
@@ -78,7 +78,7 @@ def call_chatgpt_fuzzing_tester(prompt):
     return completion
 
 # LLM指导针对CVE以及漏洞代码生成测试用例
-def generate_test_inputs_cve(code, cve_id):
+def generate_test_inputs_cve(code, cwe_id):
     try:
         text = f"""
          {construct_cve_prompt_fuzz_batch}
@@ -89,7 +89,7 @@ def generate_test_inputs_cve(code, cve_id):
         {code}
         ```
 
-        **CVE ID**: {cve_id}
+        **CVE ID**: {cwe_id}
  
         ## Completion 2:
 
@@ -111,7 +111,7 @@ def generate_test_inputs_cve(code, cve_id):
 
 
 
-def generate_test_inputs_cve_5(code, cve_id):
+def generate_test_inputs_cve_5(code, cwe_id):
     try:
         text = f"""
          {construct_cve_prompt_fuzz_batch_5}
@@ -122,7 +122,7 @@ def generate_test_inputs_cve_5(code, cve_id):
         {code}
         ```
 
-        **CVE ID**: {cve_id}
+        **CVE ID**: {cwe_id}
  
         ## Completion 2:
 
@@ -143,7 +143,7 @@ def generate_test_inputs_cve_5(code, cve_id):
     return completion
 
 
-def generate_test_inputs_cve_20(code, cve_id):
+def generate_test_inputs_cve_20(code, cwe_id):
     try:
         text = f"""
          {construct_cve_prompt_fuzz_batch_20}
@@ -154,7 +154,7 @@ def generate_test_inputs_cve_20(code, cve_id):
         {code}
         ```
 
-        **CVE ID**: {cve_id}
+        **CVE ID**: {cwe_id}
  
         ## Completion 2:
 
@@ -175,7 +175,7 @@ def generate_test_inputs_cve_20(code, cve_id):
     return completion
 
 
-def generate_test_inputs_cve_40(code, cve_id):
+def generate_test_inputs_cve_40(code, cwe_id):
     try:
         text = f"""
          {construct_cve_prompt_fuzz_batch_40}
@@ -186,7 +186,7 @@ def generate_test_inputs_cve_40(code, cve_id):
         {code}
         ```
 
-        **CVE ID**: {cve_id}
+        **CVE ID**: {cwe_id}
  
         ## Completion 2:
 

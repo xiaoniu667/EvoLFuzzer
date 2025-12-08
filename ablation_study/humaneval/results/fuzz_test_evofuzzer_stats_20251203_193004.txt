@@ -1,0 +1,3 @@
+文件名: seed/fuzz_test_evofuzzer.jsonl
+总测试用例数: 1346
+测试代码分支覆盖: 449

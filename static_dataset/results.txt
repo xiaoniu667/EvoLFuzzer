@@ -1,0 +1,13 @@
+Total files analyzed: 25
+Vulnerable files found: 9
+Vulnerability ratio: 36.00%
+
+Total files analyzed: 83
+Vulnerable files found: 26
+Vulnerability ratio: 31.33%
+
+
+Total files analyzed: 121
+Vulnerable files found: 40
+Vulnerability ratio: 33.06%
+

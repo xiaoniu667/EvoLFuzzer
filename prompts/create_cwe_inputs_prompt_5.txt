@@ -1,4 +1,4 @@
-**Role**: As a code tester specialized in fuzzing, your task is to create mutated inputs for fuzzing testing based on the provided code and CVE ID.
+**Role**: As a code tester specialized in fuzzing, your task is to create mutated inputs for fuzzing testing based on the provided code and CWE ID.
 
 **Objective**:
 1. Generate basic initial inputs to verify the fundamental functionality of the function under normal conditions.

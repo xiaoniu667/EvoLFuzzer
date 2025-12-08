@@ -1,0 +1,114 @@
+.cold {
+    color: #acbcdb #012790;
+}
+
+/* Demystifying CXL Memory with Genuine CXL-Ready Systems and Devices */
+.style-1 {
+    color: #0070c0;
+    color: #ffc000 #0070c0;
+    color: #ed7d31 #4472c4 #63c0cf;
+    color: #ffc000 #ed7d31 #0070c0 #63c0cf;
+    color: #ffc000 #ed7d31 #5b9bd5 #4bbabd #358d8f;
+    color: #ffc000 #ed7d31 #5b9bd5 #0070c0 #4bbabd #358d8f;
+    color: #ffc000 #ed7d31 #2f5597 #5b9bd5 #0070c0 #4bbabd #358d8f;
+}
+
+.style-2 {
+    color: #0e3e8b #fbe57c;
+    color: #0e3e8b #366bae #fbe57c;
+    color: #0e3e8b #366bae #e2eaef #fbe57c;
+    color: #0e3e8b #366bae #e2eaef #fbe57c #ddb33d;
+}
+
+.style-3 {
+    color: #5c8fc6 #8dc2e9 #d6a370 #794d35 ;
+    color: #0f2b61 #5c8fc6 #8dc2e9 #d6a370  #794d35;
+    color: #0f2b61 #5c8fc6 #8dc2e9 #d7af88  #d6a370  #794d35;
+}
+
+.style-4 {
+    color: #3851a3 #72aacc #fdba6c #eb5d3b;
+    color: #3851a3 #72aacc #fdba6c #eb5d3b #a90226;
+    color: #3851a3 #72aacc #fefbba #fdba6c #eb5d3b #a90226 ;
+    color: #3851a3 #72aacc #cae9f3 #fefbba #fdba6c #eb5d3b #a90226;
+}
+
+.style-5 {
+    color: #405095 #59b5e8 #d9d3e8 #fbf9ce;
+    color: #405095 #3e8fbf #59b5e8 #d9d3e8 #fbf9ce;
+    color: #405095 #3e8fbf #59b5e8 #a6c0e5 #d9d3e8 #fbf9ce;
+    color: #405095 #3e8fbf #59b5e8 #a6c0e5 #d9d3e8 #fbf9ce #faf6a3;
+}
+
+.style-6 {
+    color: #205898 #5c9bcf #c9cedb #dcdbc7;
+    color: #205898 #5c9bcf #cee3f0 #c9cedb #dcdbc7;
+    color: #205898 #5c9bcf #cee3f0 #c9cedb #dcdbc7 #d8d59c;
+}
+
+
+
+.style-8 {
+    color: #807C7D #C1565E #DCA96A #82AD7F;
+    color: #807C7D #C1565E #DCA96A #82AD7F #7EA4D1;
+    color: #807C7D #C1565E #DCA96A #82AD7F #7EA4D1 #79438E;
+}
+
+.style-9 {
+    color: #0070c0;
+    color: #ffc000 #0070c0;
+    color: #ffc000 #4472c4 #63c0cf;
+    color: #ffc000 #ed7d31 #0070c0 #63c0cf;
+    color: #f6bb06 #ed7d31 #5b9bd5 #4bbabd #358d8f;
+    /*color: #ffc000 #de8ab9 #5b9bd5 #4bbabd #ed7d31 #0070c0;*/
+    color: #ffc000 #ed7d31 #5b9bd5 #0070c0 #4bbabd #0070c0;
+    /*color: #f6bb06 #de8ab9 #5b9bd5 #4bbabd #ed7d31 #0070c0;*/
+    /*#ffaa419*/
+}
+
+
+.style-10 {
+    color: #A1A9D0 #F0988C #B88D1D #9E9E9E;
+    color: #A1A9D0 #F0988C #B88D1D #9E9E9E #CFEAF1;
+    color: #A1A9D0 #F0988C #B88D1D #9E9E9E #CFEAF1 #C4A5DE;
+    color: #A1A9D0 #F0988C #B88D1D #9E9E9E #CFEAF1 #C4A5DE #F6CAE5;
+    color: #A1A9D0 #F0988C #B88D1D #9E9E9E #CFEAF1 #C4A5DE #F6CAE5 #96CCCB;
+}
+
+
+/*.style-11 {*/
+/*  color: #000000;*/
+/*  color: #000000 #828182;*/
+/*  color: #000000 #828182 #988DBD;*/
+/*  color: #000000 #828182 #988DBD #D4C9E3;*/
+/*  color: #000000 #828182 #988DBD #D4C9E3 #4A436B;*/
+/*  color: #000000 #828182 #988DBD #D4C9E3 #4A436B #B7ABC4;*/
+/*  color: #000000 #828182 #988DBD #D4C9E3 #4A436B #B7ABC4 #746D97;*/
+/*  color: #000000 #828182 #988DBD #D4C9E3 #4A436B #B7ABC4 #746D97 #C7B8C7;*/
+/*  color: #000000 #828182 #988DBD #D4C9E3 #4A436B #B7ABC4 #746D97 #C7B8C7 #C97DC1;*/
+/*  color: #000000 #828182 #988DBD #D4C9E3 #4A436B #B7ABC4 #746D97 #C7B8C7 #C97DC1 #5E405C;*/
+/*}*/
+
+
+.style-11 {
+  color: #000000;
+  color: #000000 #828182;
+  color: #000000 #828182 #988DBD;
+  color: #000000 #828182 #988DBD #D4C9E3;
+  color: #000000 #828182 #988DBD #D4C9E3 #4A436B;
+  color: #000000 #828182 #988DBD #D4C9E3 #4A436B #B7ABC4;
+  color: #000000 #828182 #988DBD #D4C9E3 #4A436B #B7ABC4 #746D97;
+  color: #000000 #828182 #988DBD #D4C9E3 #4A436B #B7ABC4 #746D97 #C7B8C7;
+  color: #000000 #828182 #988DBD #D4C9E3 #4A436B #B7ABC4 #746D97 #C7B8C7 #C97DC1;
+  color: #000000 #828182 #988DBD #D4C9E3 #4A436B #B7ABC4 #746D97 #C7B8C7 #C97DC1 #5E405C;
+}
+
+.style-12 {
+    color: #0070c0;
+    color: #ffc000 #0070c0;
+    color: #ed7d31 #4472c4 #63c0cf;
+    color: #ed7d31 #0070c0 #63c0cf #828182;
+    color: #ffc000 #ed7d31 #5b9bd5 #4bbabd #358d8f;
+    color: #ffc000 #ed7d31 #5b9bd5 #0070c0 #4bbabd #358d8f;
+    color: #ffc000 #ed7d31 #2f5597 #5b9bd5 #0070c0 #4bbabd #358d8f;
+}

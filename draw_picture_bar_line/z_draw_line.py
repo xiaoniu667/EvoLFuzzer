@@ -1,5 +1,6 @@
 import matplotlib
 import numpy as np
+from matplotlib import pyplot as plt
 
 from draw_picture_bar_line import LineGraph
 
@@ -8,23 +9,30 @@ matplotlib.rcParams['ps.fonttype'] = 42
 matplotlib.rcParams['font.size'] = 16  # 全局字体
 
 # 随机生成一个 5 x 7 的数据
-a = 4
+a = 8
 b = 6
 
+# humaneval
 y_data = np.array([
-    [0, 107, 122, 131, 134, 141],
-    [0, 112, 119, 121, 123, 125],
-    [0, 89, 100, 105, 112, 113],
-    [0, 100, 106, 109, 112, 113],
+    [0, 389, 483, 533, 571, 590],
+    [0, 335, 385, 425, 449, 449],
+    [0, 285, 344, 383, 398, 398],
+    [0, 298, 313, 324, 331, 339],  # aco
+    [0, 298, 321, 330, 338, 348],  # pso
+    [0, 314, 343, 364, 377, 392],  # ea
+    [0, 276, 312, 332, 345, 356],  # ga
+    [0, 279, 298, 310, 322, 329],  # rma
 ])
 
-# y_data = np.array([
-#     [0, 389, 483, 533, 571, 590],
-#     [0, 335, 385, 425, 449, 449],
-#     [0, 285, 344, 383, 398, 398],
-#     [0, 279, 298, 310, 322, 329],
-# ])
 
+
+
+# y_data = np.array([
+#     [0, 107, 122, 131, 134, 141],
+#     [0, 112, 119, 121, 123, 125],
+#     [0, 89, 100, 105, 112, 113],
+#     [0, 100, 106, 109, 112, 113],
+# ])
 
 # y_data = np.array([
 #     [0, 29, 33, 38, 39, 39],
@@ -49,11 +57,10 @@ y_data = np.array([
 
 x_data = [i for i in range(0, b)]
 
-line_names = ['EvoLFuzzer', 'EvoLFuzzer_w/o_LLM', 'EvoLFuzzer_w/o_EA', 'RMA']  # 改成你论文里真实的名称
-
+line_names = ['EvoLFuzzer', 'EvoLFuzzer_w/o_LLM', 'EvoLFuzzer_w/o_EA', 'ACO', 'PSO', 'EA', 'GA', 'RMA']
 # 初始化一个对象
 graph = LineGraph()
-graph.style_id = 12
+graph.style_id = 13
 
 # 传入数据/组/列的文字信息
 graph.plot_2d(x_data, y_data, line_names)
@@ -61,6 +68,8 @@ graph.plot_2d(x_data, y_data, line_names)
 # 调整x/y轴文字
 graph.x_label = "Epoch"
 graph.y_label = "Path Coverage"
+
+plt.ylim(100, None)
 
 # 保存图片
 graph.save()

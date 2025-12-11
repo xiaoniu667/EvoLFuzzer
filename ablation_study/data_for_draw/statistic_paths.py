@@ -61,7 +61,7 @@ def read_and_stat_from_file(file_path, step=5, logger=None):
     logger.info("-" * 40)
 
 
-def batch_process_folder(folder_path, step=5, log_filename='outputs_for_draw/llmseceval_coverage_stats.txt'):
+def batch_process_folder(folder_path, step=5, log_filename='outputs_for_draw/cweval_coverage_stats.txt'):
     # 设置日志文件
     setup_logging(log_filename)
 
@@ -81,5 +81,5 @@ def batch_process_folder(folder_path, step=5, log_filename='outputs_for_draw/llm
 
 # 调用函数时传入文件夹路径和自定义步长
 folder_path = 'results'  # 替换为你的文件夹路径
-step = 83  # 你可以在这里设置步长 一般是数据集的数量
+step = 25  # 设置步长 一般是数据集的数量
 batch_process_folder(folder_path, step)

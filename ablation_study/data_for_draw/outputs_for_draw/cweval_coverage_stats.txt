@@ -1,36 +1,72 @@
-2025-12-03 20:22:57,907 - INFO - File: results\fuzz_test_evofuzzer_branch_coverage_20251202_235913.txt
-2025-12-03 20:22:57,907 - INFO - Total paths covered: 32
-2025-12-03 20:22:57,907 - INFO - Path coverage per step (cumulative):
-2025-12-03 20:22:57,907 - INFO - Step 1: 26
-2025-12-03 20:22:57,907 - INFO - Step 2: 27
-2025-12-03 20:22:57,907 - INFO - Step 3: 30
-2025-12-03 20:22:57,907 - INFO - Step 4: 30
-2025-12-03 20:22:57,907 - INFO - Step 5: 32
-2025-12-03 20:22:57,907 - INFO - ----------------------------------------
-2025-12-03 20:22:57,907 - INFO - File: results\fuzz_test_evolfuzzer_branch_coverage_20251129_084208.txt
-2025-12-03 20:22:57,907 - INFO - Total paths covered: 39
-2025-12-03 20:22:57,907 - INFO - Path coverage per step (cumulative):
-2025-12-03 20:22:57,907 - INFO - Step 1: 29
-2025-12-03 20:22:57,907 - INFO - Step 2: 33
-2025-12-03 20:22:57,907 - INFO - Step 3: 38
-2025-12-03 20:22:57,907 - INFO - Step 4: 39
-2025-12-03 20:22:57,907 - INFO - Step 5: 39
-2025-12-03 20:22:57,907 - INFO - ----------------------------------------
-2025-12-03 20:22:57,907 - INFO - File: results\fuzz_test_lfuzzer_branch_coverage_20251202_235906.txt
-2025-12-03 20:22:57,907 - INFO - Total paths covered: 29
-2025-12-03 20:22:57,907 - INFO - Path coverage per step (cumulative):
-2025-12-03 20:22:57,907 - INFO - Step 1: 23
-2025-12-03 20:22:57,907 - INFO - Step 2: 24
-2025-12-03 20:22:57,907 - INFO - Step 3: 25
-2025-12-03 20:22:57,907 - INFO - Step 4: 28
-2025-12-03 20:22:57,907 - INFO - Step 5: 29
-2025-12-03 20:22:57,907 - INFO - ----------------------------------------
-2025-12-03 20:22:57,907 - INFO - File: results\fuzz_test_rma_branch_coverage_20251201_144834.txt
-2025-12-03 20:22:57,907 - INFO - Total paths covered: 27
-2025-12-03 20:22:57,907 - INFO - Path coverage per step (cumulative):
-2025-12-03 20:22:57,907 - INFO - Step 1: 26
-2025-12-03 20:22:57,907 - INFO - Step 2: 27
-2025-12-03 20:22:57,907 - INFO - Step 3: 27
-2025-12-03 20:22:57,907 - INFO - Step 4: 27
-2025-12-03 20:22:57,907 - INFO - Step 5: 27
-2025-12-03 20:22:57,907 - INFO - ----------------------------------------
+2025-12-11 20:58:21,949 - INFO - File: results/fuzz_test_rma_branch_coverage_20251201_144834.txt
+2025-12-11 20:58:21,949 - INFO - Total paths covered: 27
+2025-12-11 20:58:21,949 - INFO - Path coverage per step (cumulative):
+2025-12-11 20:58:21,949 - INFO - Step 1: 26
+2025-12-11 20:58:21,949 - INFO - Step 2: 27
+2025-12-11 20:58:21,949 - INFO - Step 3: 27
+2025-12-11 20:58:21,949 - INFO - Step 4: 27
+2025-12-11 20:58:21,949 - INFO - Step 5: 27
+2025-12-11 20:58:21,949 - INFO - ----------------------------------------
+2025-12-11 20:58:21,950 - INFO - File: results/fuzz_test_aco_branch_coverage_20251129_085526.txt
+2025-12-11 20:58:21,950 - INFO - Total paths covered: 28
+2025-12-11 20:58:21,950 - INFO - Path coverage per step (cumulative):
+2025-12-11 20:58:21,950 - INFO - Step 1: 27
+2025-12-11 20:58:21,950 - INFO - Step 2: 27
+2025-12-11 20:58:21,950 - INFO - Step 3: 28
+2025-12-11 20:58:21,950 - INFO - Step 4: 28
+2025-12-11 20:58:21,950 - INFO - Step 5: 28
+2025-12-11 20:58:21,950 - INFO - ----------------------------------------
+2025-12-11 20:58:21,950 - INFO - File: results/fuzz_test_ea_branch_coverage_20251129_085525.txt
+2025-12-11 20:58:21,950 - INFO - Total paths covered: 30
+2025-12-11 20:58:21,950 - INFO - Path coverage per step (cumulative):
+2025-12-11 20:58:21,950 - INFO - Step 1: 28
+2025-12-11 20:58:21,950 - INFO - Step 2: 28
+2025-12-11 20:58:21,950 - INFO - Step 3: 29
+2025-12-11 20:58:21,950 - INFO - Step 4: 30
+2025-12-11 20:58:21,950 - INFO - Step 5: 30
+2025-12-11 20:58:21,950 - INFO - ----------------------------------------
+2025-12-11 20:58:21,951 - INFO - File: results/fuzz_test_evolfuzzer_branch_coverage_20251129_084208.txt
+2025-12-11 20:58:21,951 - INFO - Total paths covered: 39
+2025-12-11 20:58:21,951 - INFO - Path coverage per step (cumulative):
+2025-12-11 20:58:21,951 - INFO - Step 1: 29
+2025-12-11 20:58:21,951 - INFO - Step 2: 33
+2025-12-11 20:58:21,951 - INFO - Step 3: 38
+2025-12-11 20:58:21,951 - INFO - Step 4: 39
+2025-12-11 20:58:21,951 - INFO - Step 5: 39
+2025-12-11 20:58:21,951 - INFO - ----------------------------------------
+2025-12-11 20:58:21,951 - INFO - File: results/fuzz_test_evofuzzer_branch_coverage_20251202_235913.txt
+2025-12-11 20:58:21,951 - INFO - Total paths covered: 32
+2025-12-11 20:58:21,951 - INFO - Path coverage per step (cumulative):
+2025-12-11 20:58:21,951 - INFO - Step 1: 26
+2025-12-11 20:58:21,951 - INFO - Step 2: 27
+2025-12-11 20:58:21,951 - INFO - Step 3: 30
+2025-12-11 20:58:21,951 - INFO - Step 4: 30
+2025-12-11 20:58:21,951 - INFO - Step 5: 32
+2025-12-11 20:58:21,951 - INFO - ----------------------------------------
+2025-12-11 20:58:21,951 - INFO - File: results/fuzz_test_ga_branch_coverage_20251129_085532.txt
+2025-12-11 20:58:21,951 - INFO - Total paths covered: 30
+2025-12-11 20:58:21,951 - INFO - Path coverage per step (cumulative):
+2025-12-11 20:58:21,952 - INFO - Step 1: 28
+2025-12-11 20:58:21,952 - INFO - Step 2: 29
+2025-12-11 20:58:21,952 - INFO - Step 3: 29
+2025-12-11 20:58:21,952 - INFO - Step 4: 30
+2025-12-11 20:58:21,952 - INFO - Step 5: 30
+2025-12-11 20:58:21,952 - INFO - ----------------------------------------
+2025-12-11 20:58:21,952 - INFO - File: results/fuzz_test_lfuzzer_branch_coverage_20251202_235906.txt
+2025-12-11 20:58:21,952 - INFO - Total paths covered: 29
+2025-12-11 20:58:21,952 - INFO - Path coverage per step (cumulative):
+2025-12-11 20:58:21,952 - INFO - Step 1: 23
+2025-12-11 20:58:21,952 - INFO - Step 2: 24
+2025-12-11 20:58:21,952 - INFO - Step 3: 25
+2025-12-11 20:58:21,952 - INFO - Step 4: 28
+2025-12-11 20:58:21,952 - INFO - Step 5: 29
+2025-12-11 20:58:21,952 - INFO - ----------------------------------------
+2025-12-11 20:58:21,953 - INFO - File: results/fuzz_test_pso_branch_coverage_20251129_085523.txt
+2025-12-11 20:58:21,953 - INFO - Total paths covered: 28
+2025-12-11 20:58:21,953 - INFO - Path coverage per step (cumulative):
+2025-12-11 20:58:21,953 - INFO - Step 1: 27
+2025-12-11 20:58:21,953 - INFO - Step 2: 27
+2025-12-11 20:58:21,953 - INFO - Step 3: 27
+2025-12-11 20:58:21,953 - INFO - Step 4: 27
+2025-12-11 20:58:21,953 - INFO - Step 5: 28
+2025-12-11 20:58:21,953 - INFO - ----------------------------------------

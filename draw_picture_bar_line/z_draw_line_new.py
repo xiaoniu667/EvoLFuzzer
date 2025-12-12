@@ -89,7 +89,7 @@ line_names = ['EvoLFuzzer', 'EvoLFuzzer_w/o_LLM', 'EvoLFuzzer_w/o_EA', 'ACO', 'P
 colors = ['#2D68C4', '#ED7D31', '#70AD47', '#C00000', '#7030A0', '#A16A2D', '#C76DB6', '#828182']
 markers = ['s', 'P', '^', 'v', '*', 'x', 'D', 'h']
 
-plt.figure(figsize=(7, 5))
+plt.figure(figsize=(7, 6))
 
 for y, name, color, marker in zip(y_data, line_names, colors, markers):
     plt.plot(x_data, y, label=name, color=color, marker=marker, linewidth=2, markersize=7)
@@ -98,7 +98,7 @@ plt.xlabel("Epoch")
 plt.ylabel("Path Coverage")
 plt.xticks(x_data)
 plt.yticks(fontsize=14)
-plt.ylim(50, None)
+plt.ylim(70, None)
 plt.grid(True, linestyle='--', alpha=0.8)
 
 plt.legend(loc='lower right', fontsize=10, markerscale=0.8, ncol=1, frameon=True, facecolor='white')

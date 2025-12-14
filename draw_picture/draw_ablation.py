@@ -117,7 +117,7 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
     ax.set_ylabel('', fontsize=40, fontweight='bold', labelpad=25)  # labelpad增加y轴与图像的距离
     ax.tick_params(axis='both', labelsize=32)
     ax.legend(fontsize=24, loc='upper left', bbox_to_anchor=(0.02, 0.98), borderaxespad=0., handlelength=3)
-    ax.grid(True, linestyle='--', linewidth=1, alpha=0.6)
+    ax.grid(True, linestyle='--', linewidth=1, alpha=0.8)
 
     try:
         max_round = max(d['Round'].max() for d in sorted_data_list)
@@ -142,10 +142,10 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
 
 
 if __name__ == '__main__':
-    folder_path = './inputs/cweval_10seed_5epoch_ablation'
+    folder_path = './inputs/securityeval_10seed_5epoch_ablation'
     output_dir = 'results/ablation'
     # title = "HumanEval Dataset"
     title = ""
-    result_name = "CWEVAL"
-    step = 25
+    result_name = "SecurityEval"
+    step = 121
     plot_coverage_from_txt(folder_path, output_dir, title, result_name, step)

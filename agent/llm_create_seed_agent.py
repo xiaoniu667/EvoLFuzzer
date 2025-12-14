@@ -69,7 +69,7 @@ class TesterFuzzAgent:
             return json_inputs
         else:
             return {}
-    # 默认是10个种子
+
     def generate_test_inputs_cve(self, cve_id):
         prompt = self.entry['Insecure_code']
         inputs = generate_test_inputs_cve(prompt, cve_id)

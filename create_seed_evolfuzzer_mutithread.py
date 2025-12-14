@@ -148,7 +148,7 @@ def tournament_selection(population, coverage_dict, tournament_size: int = 3):
         tournament_size = len(population)
 
     contestants = random.sample(population, tournament_size)
-    # 按当前已知路径长度排序，取最优的那个
+    # 按当前已知路径长度排序
     winner = max(
         contestants,
         key=lambda x: len(coverage_dict[json.dumps(convert_to_serializable(x), sort_keys=True)])

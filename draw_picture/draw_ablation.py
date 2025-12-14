@@ -1,10 +1,12 @@
 import pandas as pd
 import matplotlib
+
 matplotlib.use('Agg')  # 非交互模式，适合服务器
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import os
 import datetime
+
 
 def find_round_breaks(df, step):
     """
@@ -18,9 +20,10 @@ def find_round_breaks(df, step):
         breaks.append(total_len)
     return breaks
 
+
 def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
     """
-    绘制 Path Coverage 曲线，输出高分辨率 PNG 和 PDF，字体更大。
+    绘制 Path Coverage 曲线，输出高分辨率 PNG 和 PDF，字体更大，标题和纵坐标距离更远。
     """
     # 设置字体
     font_path = 'consola-1.ttf'
@@ -44,7 +47,7 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
 
     data_list = []
     file_names = []
-    legend_order = ['EvoLFuzzer', 'RMA']  # 可根据需要调整
+    legend_order = ['EvoLFuzzer', 'EvoLFuzzer_wo_EA', 'EvoLFuzzer_wo_LLM']  # 调整图例顺序
 
     # 读取所有 txt 文件
     for file in os.listdir(folder_path):
@@ -58,7 +61,7 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
             round_breaks = find_round_breaks(data, step)
             print(f"{file} 自动检测到轮次边界: {round_breaks}")
 
-            # 索引 → 轮次映射
+            # 索引 → 轮次映射（从 0 开始）
             data['Round'] = 0.0
             for i in range(len(round_breaks) - 1):
                 start_idx = round_breaks[i]
@@ -93,19 +96,28 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
 
     # 绘图
     fig, ax = plt.subplots(figsize=(16, 12))  # 大尺寸
-    colors = ['#ED7D31FF', '#5B9BD5FF']
+    colors = ['#ED7D31FF', '#5B9BD5FF', '#70AD47FF']  # 橙, 蓝, 绿
+    linestyles = ['-', (3, 5, 1, 5),(5, 5)]  # 实线, 虚线, 点划线
+    # linestyles = ['-', '-', '-']  # 实线, 虚线, 点划线
 
     for i, (data, label) in enumerate(zip(sorted_data_list, sorted_file_names)):
-        ax.plot(data['Round'], data['Cumulative_Coverage'],
-                label=label, color=colors[i % len(colors)], linestyle='-', linewidth=4)
+        plot_kwargs = {
+            'color': colors[i % len(colors)],
+            'linestyle': '-',  # 默认使用实线
+            'linewidth': 4.5,  # 粗线条，更清晰
+        }
+        if isinstance(linestyles[i % len(linestyles)], tuple):
+            plot_kwargs['dashes'] = linestyles[i % len(linestyles)]
+        display_label = label.replace('_wo_', '_w/o_')
+        ax.plot(data['Round'], data['Cumulative_Coverage'], label=display_label, **plot_kwargs)
 
-    # 字体和线条设置更大
-    ax.set_title(title, fontsize=48, fontweight='bold', pad=30)  # pad=30 可以根据需要调节
-    ax.set_xlabel("Rounds", fontsize=40, fontweight='bold')
-    ax.set_ylabel("", fontsize=40, fontweight='bold', labelpad=25)  # labelpad=25 可以调节
+    # 增大字体并增加标题和ylabel的距离
+    ax.set_title(title, fontsize=48, fontweight='bold', pad=30)  # pad增加标题与图像的距离
+    ax.set_xlabel('Rounds', fontsize=40, fontweight='bold', labelpad=20)  # labelpad增加x轴与图像的距离
+    ax.set_ylabel('', fontsize=40, fontweight='bold', labelpad=25)  # labelpad增加y轴与图像的距离
     ax.tick_params(axis='both', labelsize=32)
-    ax.legend(fontsize=32, loc='upper left', bbox_to_anchor=(0.02, 0.98), borderaxespad=0.)
-    ax.grid(True, linestyle='--', linewidth=1, alpha=0.8)
+    ax.legend(fontsize=24, loc='upper left', bbox_to_anchor=(0.02, 0.98), borderaxespad=0., handlelength=3)
+    ax.grid(True, linestyle='--', linewidth=1, alpha=0.6)
 
     try:
         max_round = max(d['Round'].max() for d in sorted_data_list)
@@ -119,20 +131,21 @@ def plot_coverage_from_txt(folder_path, output_dir, title, result_name, step):
 
     plt.tight_layout()
 
-    # 保存文件
+    # 保存文件，高分辨率PNG + PDF矢量图
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_file_pdf = os.path.join(output_dir, f'coverage_{result_name}_{timestamp}.pdf')
+    output_file_pdf = os.path.join(output_dir, f'coverage_{result_name}_Ablation_{timestamp}.pdf')
 
-    # PDF 矢量图
     plt.savefig(output_file_pdf, bbox_inches='tight', format='pdf')
     plt.close()
 
-    print(f"图表已保存为:  {output_file_pdf}")
+    print(f"图表已保存为: {output_file_pdf}")
+
 
 if __name__ == '__main__':
-    folder_path = './inputs/mbpp_10seed_5epoch'
-    output_dir = 'results'
+    folder_path = './inputs/cweval_10seed_5epoch_ablation'
+    output_dir = 'results/ablation'
+    # title = "HumanEval Dataset"
     title = ""
-    result_name = "MBPP"
-    step = 99
+    result_name = "CWEVAL"
+    step = 25
     plot_coverage_from_txt(folder_path, output_dir, title, result_name, step)

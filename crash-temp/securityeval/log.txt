@@ -1,0 +1,26 @@
+================================================================================
+  表 1: 安全指标 — Unique Crashes 对比
+================================================================================
+  Method                  Total Inputs     Unique Crashes Top Exception Types
+  --------------------------------------------------------------------------------------------
+  EvoLFuzzer (Ours)                118                 38 TypeError, ValueError, AttributeError
+  Random (RMA)                     970                212 TypeError, AttributeError, FileNotFoundError
+  ACO                              123                 33 TypeError, ValueError, FileNotFoundError
+  EA                               119                 34 TypeError, ValueError, AttributeError
+  GA                               119                 33 TypeError, AttributeError, ValueError
+  PSO                              122                 31 TypeError, ValueError, AttributeError
+============================================================================================
+
+  → EvoLFuzzer vs Random (RMA): 38 vs 212  差值: -174
+  → EvoLFuzzer vs ACO: 38 vs 33  差值: +5
+  → EvoLFuzzer vs EA: 38 vs 34  差值: +4
+  → EvoLFuzzer vs GA: 38 vs 33  差值: +5
+  → EvoLFuzzer vs PSO: 38 vs 31  差值: +7
+
+各方法崩溃文件保存路径：
+  [EvoLFuzzer (Ours)] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_evolfuzzer  (38 个唯一崩溃)
+  [Random (RMA)] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_random  (212 个唯一崩溃)
+  [ACO] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_aco  (33 个唯一崩溃)
+  [EA] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_ea  (34 个唯一崩溃)
+  [GA] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_ga  (33 个唯一崩溃)
+  [PSO] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_pso  (31 个唯一崩溃)

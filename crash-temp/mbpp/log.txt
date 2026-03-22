@@ -1,0 +1,26 @@
+================================================================================
+  表 1: 安全指标 — Unique Crashes 对比
+================================================================================
+  Method                  Total Inputs     Unique Crashes Top Exception Types
+  --------------------------------------------------------------------------------------------
+  EvoLFuzzer (Ours)                163                 63 TypeError(50), ValueError(11), IndexError(1)
+  Random (RMA)                     940                 52 IndexError(25), ValueError(16), TypeError(10)
+  ACO                              146                 20 TypeError(11), IndexError(6), ValueError(3)
+  EA                               166                 34 TypeError(22), IndexError(7), ValueError(5)
+  GA                               152                 33 TypeError(22), IndexError(8), ValueError(3)
+  PSO                              148                 17 TypeError(8), IndexError(6), ValueError(3)
+============================================================================================
+
+  → EvoLFuzzer vs Random (RMA): 63 vs 52  差值: +11
+  → EvoLFuzzer vs ACO: 63 vs 20  差值: +43
+  → EvoLFuzzer vs EA: 63 vs 34  差值: +29
+  → EvoLFuzzer vs GA: 63 vs 33  差值: +30
+  → EvoLFuzzer vs PSO: 63 vs 17  差值: +46
+
+各方法崩溃文件保存路径：
+  [EvoLFuzzer (Ours)] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_evolfuzzer  (63 个唯一崩溃)
+  [Random (RMA)] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_random  (52 个唯一崩溃)
+  [ACO] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_aco  (20 个唯一崩溃)
+  [EA] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_ea  (34 个唯一崩溃)
+  [GA] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_ga  (33 个唯一崩溃)
+  [PSO] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_pso  (17 个唯一崩溃)

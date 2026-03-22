@@ -1,0 +1,26 @@
+================================================================================
+  表 1: 安全指标 — Unique Crashes 对比
+================================================================================
+  Method                  Total Inputs     Unique Crashes Top Exception Types
+  --------------------------------------------------------------------------------------------
+  EvoLFuzzer (Ours)                317                 89 TypeError(59), ValueError(19), IndexError(6)
+  Random (RMA)                    1580                 56 ValueError(38), TypeError(9), KeyError(9)
+  ACO                              271                 24 TypeError(13), ValueError(11)
+  EA                               304                 47 TypeError(22), ValueError(17), IndexError(6)
+  GA                               265                 37 TypeError(17), ValueError(15), IndexError(5)
+  PSO                              279                 18 ValueError(10), TypeError(6), IndexError(1)
+============================================================================================
+
+  → EvoLFuzzer vs Random (RMA): 89 vs 56  差值: +33
+  → EvoLFuzzer vs ACO: 89 vs 24  差值: +65
+  → EvoLFuzzer vs EA: 89 vs 47  差值: +42
+  → EvoLFuzzer vs GA: 89 vs 37  差值: +52
+  → EvoLFuzzer vs PSO: 89 vs 18  差值: +71
+
+各方法崩溃文件保存路径：
+  [EvoLFuzzer (Ours)] /home/zyw/EvoLFuzzer/crash/crashes_evolfuzzer  (89 个唯一崩溃)
+  [Random (RMA)] /home/zyw/EvoLFuzzer/crash/crashes_random  (56 个唯一崩溃)
+  [ACO] /home/zyw/EvoLFuzzer/crash/crashes_aco  (24 个唯一崩溃)
+  [EA] /home/zyw/EvoLFuzzer/crash/crashes_ea  (47 个唯一崩溃)
+  [GA] /home/zyw/EvoLFuzzer/crash/crashes_ga  (37 个唯一崩溃)
+  [PSO] /home/zyw/EvoLFuzzer/crash/crashes_pso  (18 个唯一崩溃)

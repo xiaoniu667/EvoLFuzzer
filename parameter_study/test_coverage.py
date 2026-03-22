@@ -14,7 +14,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('branch_coverage.log'),
+        logging.FileHandler('branch_coverage.log.txt'),
         logging.StreamHandler()
     ]
 )

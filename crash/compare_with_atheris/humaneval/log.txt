@@ -1,0 +1,25 @@
+评估目录: /home/zyw/EvoLFuzzer/crash/compare_with_atheris/seed
+  [EvoLFuzzer] 总测试输入数: 290, 唯一崩溃数: 88
+  [Atheris] 总测试输入数: 458, 唯一崩溃数: 55
+
+==========================================================================================
+  表 R2: EvoLFuzzer vs Atheris (Google SOTA Python Fuzzer) — Unique Crashes
+==========================================================================================
+  Method                       Total Inputs     Unique Crashes
+  ------------------------------------------------------------------------------------------
+  EvoLFuzzer (Ours)                     290                 88 ★
+  Atheris (Google SOTA)                 458                 55
+==========================================================================================
+
+  表 R3: 方法对比
+  ----------------------------------------------------------------------
+  EvoLFuzzer (Ours)     : 测试输入=  290, 唯一崩溃=   88
+  Atheris (Google SOTA): 测试输入=  458, 唯一崩溃=   55
+
+  结论: EvoLFuzzer 胜
+  EvoLFuzzer 相对 Atheris 改进: 1.60x
+
+
+
+评估结果已保存至: /home/zyw/EvoLFuzzer/crash/compare_with_atheris/atheris_comparison_log.txt
+结构化结果已保存至: /home/zyw/EvoLFuzzer/crash/compare_with_atheris/atheris_comparison_results.json

@@ -11,7 +11,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('path_coverage.log'),
+        logging.FileHandler('path_coverage.log.txt'),
         logging.StreamHandler()
     ]
 )

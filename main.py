@@ -32,10 +32,10 @@ DEFAULT_DATASET = "HumanEval"
 # Supported fuzzing / seed generation methods (multi-threaded variants)
 METHOD_SCRIPTS: Dict[str, Path] = {
     "evolfuzzer": ROOT / "create_seed_evolfuzzer_mutithread.py",
-    "ea": ROOT / "create_seed_ea_mutithread.py",
-    "ga": ROOT / "create_seed_ga_mutithread.py",
-    "pso": ROOT / "create_seed_pso_mutithread.py",
-    "aco": ROOT / "create_seed_aco_mutithread.py",
+    "ea": ROOT / "create_seed_ea.py",
+    "ga": ROOT / "create_seed_ga.py",
+    "pso": ROOT / "create_seed_pso.py",
+    "aco": ROOT / "create_seed_aco.py",
     "rma": ROOT / "create_seed_rma_mutithread.py",
 }
 

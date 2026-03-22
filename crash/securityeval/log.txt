@@ -1,0 +1,35 @@
+====================================================================================================
+  表 1: 公平对比实验结果 — Unique Crashes (统一 Budget=50 次执行/任务)
+====================================================================================================
+  Method                     Budget    Unique Seeds  Unique Crashes Discovery Efficiency
+  ----------------------------------------------------------------------------------------------------
+  EvoLFuzzer (Ours)              50             117              38                76.0%
+  Random (RMA)                   50             117              31                62.0%
+  ACO                            50             125              30                60.0%
+  EA                             50             123              34                68.0%
+  GA                             50             119              33                66.0%
+  PSO                            50             124              32                64.0%
+====================================================================================================
+
+  表 2: EvoLFuzzer vs 基线方法 (差值分析)
+  ------------------------------------------------------------
+  EvoLFuzzer vs Random (RMA)   :  38 vs  31  差值: +  7  比率: 1.23x
+  EvoLFuzzer vs ACO            :  38 vs  30  差值: +  8  比率: 1.27x
+  EvoLFuzzer vs EA             :  38 vs  34  差值: +  4  比率: 1.12x
+  EvoLFuzzer vs GA             :  38 vs  33  差值: +  5  比率: 1.15x
+  EvoLFuzzer vs PSO            :  38 vs  32  差值: +  6  比率: 1.19x
+
+
+各方法崩溃文件保存路径：
+  [EvoLFuzzer (Ours)] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_evolfuzzer  (38 个唯一崩溃)
+  [Random (RMA)] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_random  (31 个唯一崩溃)
+  [ACO] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_aco  (30 个唯一崩溃)
+  [EA] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_ea  (34 个唯一崩溃)
+  [GA] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_ga  (33 个唯一崩溃)
+  [PSO] /home/zyw/EvoLFuzzer/crash/humaneval/crashes_pso  (32 个唯一崩溃)
+
+实验结论说明：
+  - Budget: 每个任务的总执行次数（固定为 50）
+  - Unique Seeds: 保存下来的测试用例数量（仅包含发现新路径的）
+  - Unique Crashes: 发现的唯一崩溃数量（基于 crash ID 去重）
+  - Discovery Efficiency: 崩溃发现效率 = Unique Crashes / Budget

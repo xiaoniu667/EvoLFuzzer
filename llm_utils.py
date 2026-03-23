@@ -4,7 +4,7 @@ import openai
 from openai import OpenAI
 
 openai.api_base = "https://api.deepseek.com/v1"
-openai.api_key = 'sk-d96f597fb81a45708deca648f37d7708' #替换为自己的key
+openai.api_key = 'sk-37bc48b831f743ce8d3d4d5ca6356c35' #替换为自己的key
 model = "deepseek-chat"
 client = OpenAI(api_key=openai.api_key, base_url=openai.api_base)
 

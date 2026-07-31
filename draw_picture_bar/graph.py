@@ -186,13 +186,15 @@ class Graph:
         self._check_config()
 
         if self.width_picture:
-            self.fig.set_size_inches(16, 4)
+            # 只有在没有手动设置过尺寸时才用默认宽图
+            if not hasattr(self, '_custom_size_set'):
+                self.fig.set_size_inches(16, 4)
 
         # 坐标轴大字体（SCI 风格）
         if self.x_label:
-            self.ax.set_xlabel(self.x_label, fontsize=18)
+            self.ax.set_xlabel(self.x_label, fontsize=20)
         if self.y_label:
-            self.ax.set_ylabel(self.y_label, fontsize=18)
+            self.ax.set_ylabel(self.y_label, fontsize=20)
 
         # 网格线
         if self.grid:

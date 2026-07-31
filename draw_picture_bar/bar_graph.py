@@ -58,7 +58,7 @@ class BarGraph(Graph):
 
         # 如果列数很多, 考虑到组间距, 所以重新计算一下柱状图宽度
         if column_len >= 3:
-            self._bar_width = (0.5 - self._group_threshold) / column_len * 2
+            self._bar_width = (0.58 - self._group_threshold) / column_len * 2
 
         colors = COLOR.get_colors(column_len, self.style_id, emphasize_index)
         all_bars = []  # 存储所有柱状图对象
@@ -70,7 +70,7 @@ class BarGraph(Graph):
             bar_data = [data[j][i] for j in range(group_len)]
             hatch_pattern = "\\\\\\" if i == emphasize_index else ""
             bars = self.ax.bar(
-                x_ticks, bar_data, width=self._bar_width, color=colors[i], edgecolor="#E8E8E8", linewidth=0.3,
+                x_ticks, bar_data, width=self._bar_width, color=colors[i], edgecolor="#E8E8E8", linewidth=0.5,
                 hatch=hatch_pattern
             )
             # bars = self.ax.bar(
@@ -98,7 +98,7 @@ class BarGraph(Graph):
             handlelength=1,  # 图例长宽, 修改为正方形
             handleheight=1,  # 图例长宽, 修改为正方形
             handletextpad=0.4,  # 缩短文字和图例的间距
-            fontsize=15,
+            fontsize=18,
             # fontsize="x-small" if column_len >= 7 else "medium",  # 图例文字大小
         )
 

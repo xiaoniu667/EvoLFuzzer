@@ -59,8 +59,9 @@ column_names = [
 
 # 初始化对象
 graph = BarGraph()
+graph._bar_width = 1
 graph.show_values = True
-graph.value_fontsize = 5
+graph.value_fontsize = 8
 graph.value_format = ".1f"  # 保留一位小数
 graph.style_id = 11
 # emphasize_index = 8          # 改为8，因为现在 EvoLFuzzer 是第9个方法（索引从0开始）
@@ -73,6 +74,9 @@ graph.plot_2d(y, group_names, column_names)
 # 坐标轴标签
 graph.x_label = ""
 graph.y_label = "Path Coverage (%)"
-
+graph.fig.set_size_inches(20, 5)
+graph._custom_size_set = True
 # 保存 PDF 矢量图
 graph.save()
+
+graph.save("result.png")

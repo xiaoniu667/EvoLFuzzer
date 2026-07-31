@@ -1,0 +1,57 @@
+[
+  {
+    "folder_path": "./inputs/mbpp_10seed_5epoch_ablation",
+    "output_dir": "results/ablation",
+    "title": "",
+    "result_name": "MBPP",
+    "step": 99,
+    "legend_order": [
+      "EvoLFuzzer",
+      "RMA"
+    ]
+  },
+  {
+    "folder_path": "./inputs/securityeval_10seed_5epoch_ablation",
+    "output_dir": "results/ablation",
+    "title": "",
+    "result_name": "SecurityEval",
+    "step": 121,
+    "legend_order": [
+      "EvoLFuzzer",
+      "RMA"
+    ]
+  },
+  {
+    "folder_path": "./inputs/cweval_10seed_5epoch_ablation",
+    "output_dir": "results/ablation",
+    "title": "",
+    "result_name": "CWEval",
+    "step": 25,
+    "legend_order": [
+      "EvoLFuzzer",
+      "RMA"
+    ]
+  },
+  {
+    "folder_path": "./inputs/llmsec_10seed_5epoch_ablation",
+      "output_dir": "results/ablation",
+    "title": "",
+    "result_name": "LLMSecEval",
+    "step": 83,
+    "legend_order": [
+      "EvoLFuzzer",
+      "RMA"
+    ]
+  },
+  {
+    "folder_path": "./inputs/human_10seed_5epoch_ablation",
+    "output_dir": "results/ablation",
+    "title": "",
+    "result_name": "HumanEval",
+    "step": 164,
+    "legend_order": [
+      "EvoLFuzzer",
+      "RMA"
+    ]
+  }
+]

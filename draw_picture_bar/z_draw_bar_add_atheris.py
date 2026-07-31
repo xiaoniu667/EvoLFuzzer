@@ -3,19 +3,20 @@ import numpy as np
 
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
-matplotlib.rcParams['font.size'] = 16  # 全局字体
+matplotlib.rcParams['font.size'] = 16
 
 from draw_picture_bar import BarGraph
 
-
 a = 5
 b = 8
+
 # ================================
 # y 按列（竖着）设置：每个子列表对应一个方法（长度为 5，按数据集顺序）
 # 数据集顺序（行顺序）：["HumanEval", "LLMSecEval", "MBPP", "SecurityEval", "CWEval"]
 # 方法顺序（列顺序）：
-# ["RMA", "GA", "EA", "PSO", "ACO", "EvoPFuzzer"]
+# ["RMA", "GA", "EA", "PSO", "ACO", "Atheris", "EvoLFuzzer_w/o_EA", "EvoLFuzzer_w/o_LLM", "EvoLFuzzer"]
 # ================================
+
 y = [
     # RMA
     [40.17, 26.04, 46.29, 16.43, 31.40],
@@ -27,14 +28,14 @@ y = [
     [42.75, 25.81, 48.96, 16.82, 32.56],
     # ACO
     [41.65, 26.50, 49.26, 16.94, 32.56],
+    # Atheris
+    [40.66, 16.59, 56.68, 10.40, 37.21],
     # EvoLFuzzer_w/o_EA
     [48.91, 26.04, 56.38, 17.84, 33.72],
     # EvoLFuzzer_w/o_LLM
     [55.14, 28.80, 65.89, 17.97, 37.21],
     # EvoLFuzzer
     [72.48, 32.49, 70.92, 20.15, 45.35],
-    # EvoLFuzzer_v2
-    [75.23, 34.12, 73.56, 21.03, 47.89],
 ]
 
 y = np.array(y).T.tolist()
@@ -50,6 +51,7 @@ column_names = [
     "EA",
     "PSO",
     "ACO",
+    "Atheris",
     "EvoLFuzzer_w/o_EA",
     "EvoLFuzzer_w/o_LLM",
     "EvoLFuzzer"
@@ -57,17 +59,16 @@ column_names = [
 
 # 初始化对象
 graph = BarGraph()
-
 graph.show_values = True
 graph.value_fontsize = 5
-
+graph.value_format = ".1f"  # 保留一位小数
 graph.style_id = 11
-emphasize_index = 7
-
+# emphasize_index = 8          # 改为8，因为现在 EvoLFuzzer 是第9个方法（索引从0开始）
 graph.width_picture = True
 
 # 绘图
-graph.plot_2d(y, group_names, column_names,emphasize_index)
+# graph.plot_2d(y, group_names, column_names, emphasize_index)
+graph.plot_2d(y, group_names, column_names)
 
 # 坐标轴标签
 graph.x_label = ""

@@ -13,6 +13,7 @@ class BarGraph(Graph):
         self.show_values = False  # 是否显示数值
         self.value_fontsize = 8  # 数值字体大小
         self.value_color = "black"  # 数值颜色
+        self.value_format = ".2f"  # 数值显示格式（默认保留2位小数）
 
     def plot(self, x_data: List[Union[str, int]], y_data: List[float]):
         """
@@ -132,7 +133,7 @@ class BarGraph(Graph):
             self.ax.text(
                 bar.get_x() + bar.get_width() / 2.,  # x坐标：柱状图中心
                 height + max(values) * 0.01,  # y坐标：柱状图顶部稍微向上一点
-                f'{value:.2f}',  # 显示数值，保留2位小数
+                f'{value:{self.value_format}}',  # 显示数值
                 ha='center',  # 水平居中
                 va='bottom',  # 垂直底部对齐
                 fontsize=self.value_fontsize,
